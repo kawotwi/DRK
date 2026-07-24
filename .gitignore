@@ -223,3 +223,4 @@ viam-server.json
 
 # Contains a hardcoded API key; use robot.py + .env instead
 viam_sdk_snippet.py
+viam_hackathon_notes.txt
