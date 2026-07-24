@@ -4,12 +4,17 @@ Pans the arm's base joint (J1) toward the tracked person's horizontal offset
 from frame center, with a deadband so it doesn't oscillate.
 
 Primary-person policy:
-  - Acquire: largest person box (closest to camera) above CONF_MIN.
+  - Acquire: the person nearest frame center, and only if they're inside the
+    middle CENTER_ACQUIRE_FRAC of the frame — your subject "claims" the camera
+    by stepping to center; people at the edges can't steal acquisition.
   - Lock: on later frames, follow the box whose center is nearest the last
-    known center (must be within MATCH_MAX_FRAC of frame width). Other people
-    walking through frame are ignored while locked.
-  - Lose: after LOST_FRAMES consecutive misses, drop the lock and hold still
-    until someone is re-acquired.
+    known center (within MATCH_MAX_FRAC of frame width) AND whose size is
+    similar (within SIZE_RATIO_MAX) — a passerby crossing close to the lens
+    shows up much larger and is rejected, so the lock doesn't transfer.
+  - Occlusion: on a miss the arm holds its last position and the lock's last
+    location is remembered; if the subject reappears near it within
+    LOST_FRAMES ticks, tracking resumes. Only after LOST_FRAMES consecutive
+    misses does the lock drop, and re-acquisition again requires center.
 
 Run:  .venv/bin/python cameraman.py
 Stop: Ctrl-C (stops the arm on exit).
@@ -32,9 +37,11 @@ KP_DEG = 6.0            # pan step (deg) at full-frame-edge offset
 MAX_STEP_DEG = 4.0      # per-tick pan clamp, keeps motion smooth at 20 deg/s
 PAN_SIGN = -1.0         # flip to +1.0 if the arm pans away from the person
 J1_LIMIT_DEG = 100.0    # keep base joint within +/- this range
-LOST_FRAMES = 5         # ticks without a match before dropping the lock
+LOST_FRAMES = 8         # ticks (~3.2s) without a match before dropping the lock
 ACQUIRE_FRAMES = 2      # consecutive ticks seen before we start moving
 MATCH_MAX_FRAC = 0.35   # lock match radius, as fraction of frame width
+CENTER_ACQUIRE_FRAC = 0.5  # new subject must be inside the middle 50% of frame
+SIZE_RATIO_MAX = 2.5    # reject lock match if box area changes more than this
 # ----------------------------------------------------------------------------
 
 
@@ -52,6 +59,7 @@ class PersonTracker:
     def __init__(self, frame_width: int):
         self.frame_width = frame_width
         self.last_cx: float | None = None
+        self.last_area: float | None = None
         self.seen_streak = 0
         self.miss_streak = 0
 
@@ -63,24 +71,46 @@ class PersonTracker:
             return self._miss()
 
         if self.last_cx is None:
-            target = max(people, key=box_area)  # acquire: closest person
+            target = self._acquire(people)
         else:
-            target = min(people, key=lambda d: abs(box_center_x(d) - self.last_cx))
-            if abs(box_center_x(target) - self.last_cx) > MATCH_MAX_FRAC * self.frame_width:
-                return self._miss()
+            target = self._match(people)
+        if target is None:
+            return self._miss()
 
         self.last_cx = box_center_x(target)
+        self.last_area = box_area(target)
         self.seen_streak += 1
         self.miss_streak = 0
         if self.seen_streak < ACQUIRE_FRAMES:
             return None  # debounce: don't chase one-frame blips
         return self.last_cx
 
+    def _acquire(self, people):
+        """New subject: the person nearest frame center, if inside the center zone."""
+        mid = self.frame_width / 2.0
+        candidate = min(people, key=lambda d: abs(box_center_x(d) - mid))
+        if abs(box_center_x(candidate) - mid) > CENTER_ACQUIRE_FRAC * mid:
+            return None  # nobody near center; wait for the subject to step in
+        return candidate
+
+    def _match(self, people):
+        """Locked: nearest box to last position, gated by distance and size."""
+        target = min(people, key=lambda d: abs(box_center_x(d) - self.last_cx))
+        if abs(box_center_x(target) - self.last_cx) > MATCH_MAX_FRAC * self.frame_width:
+            return None
+        area = box_area(target)
+        if self.last_area and area > 0:
+            ratio = max(area / self.last_area, self.last_area / area)
+            if ratio > SIZE_RATIO_MAX:
+                return None  # sudden size jump: likely a passerby, not our subject
+        return target
+
     def _miss(self) -> None:
         self.seen_streak = 0
         self.miss_streak += 1
         if self.miss_streak >= LOST_FRAMES:
             self.last_cx = None  # drop lock; next sighting re-acquires
+            self.last_area = None
         return None
 
 
