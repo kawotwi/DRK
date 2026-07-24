@@ -1,0 +1,10 @@
+{
+  "name": "viam-cpp",
+  "version": "0.1.0",
+  "description": "Viam C++ SDK: performance-critical driver modules (UR, RealSense, Orbbec, TFLite, Triton, audio).",
+  "author": { "name": "Viam DevRel", "url": "https://github.com/viam-devrel" },
+  "homepage": "https://github.com/viam-devrel/agent-skills",
+  "repository": "https://github.com/viam-devrel/agent-skills",
+  "license": "Apache-2.0",
+  "keywords": ["viam", "cpp", "drivers", "modules"]
+}

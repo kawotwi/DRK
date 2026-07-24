@@ -1,0 +1,10 @@
+{
+  "name": "viam-typescript",
+  "version": "0.1.0",
+  "description": "Viam TypeScript SDK: browser robot control, Viam Applications, HMI/dashboard patterns, WebRTC streaming.",
+  "author": { "name": "Viam DevRel", "url": "https://github.com/viam-devrel" },
+  "homepage": "https://github.com/viam-devrel/agent-skills",
+  "repository": "https://github.com/viam-devrel/agent-skills",
+  "license": "Apache-2.0",
+  "keywords": ["viam", "typescript", "javascript", "web", "hmi"]
+}

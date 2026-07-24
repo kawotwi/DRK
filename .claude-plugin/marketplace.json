@@ -1,0 +1,84 @@
+{
+  "name": "viam-agent-skills",
+  "owner": {
+    "name": "Viam DevRel",
+    "url": "https://github.com/viam-devrel"
+  },
+  "metadata": {
+    "description": "Source-verified Claude Code skills for the Viam robotics platform. Install the full suite or pick individual SDKs and tools.",
+    "version": "0.2.0"
+  },
+  "plugins": [
+    {
+      "name": "viam-skills",
+      "source": "./",
+      "description": "Full Viam skill suite — all 9 skills: SDKs, ML, fleet/module tooling, and machine tooling.",
+      "category": "robotics",
+      "tags": ["viam", "bundle", "all-sdks"],
+      "strict": false
+    },
+    {
+      "name": "viam-go-motion-vision",
+      "source": "./plugins/viam-go-motion-vision",
+      "description": "Go SDK: arm, camera, vision, motion planning, frame system.",
+      "category": "robotics",
+      "tags": ["viam", "go", "motion", "vision"]
+    },
+    {
+      "name": "viam-go-platform",
+      "source": "./plugins/viam-go-platform",
+      "description": "Go SDK: non-manipulation components, services, resource API.",
+      "category": "robotics",
+      "tags": ["viam", "go", "components"]
+    },
+    {
+      "name": "viam-modules-fleet",
+      "source": "./plugins/viam-modules-fleet",
+      "description": "Viam CLI, module lifecycle, registry, fleet and robot configuration.",
+      "category": "robotics",
+      "tags": ["viam", "cli", "fleet", "modules"]
+    },
+    {
+      "name": "viam-python",
+      "source": "./plugins/viam-python",
+      "description": "Python SDK: async clients, components/services, module dev.",
+      "category": "robotics",
+      "tags": ["viam", "python"]
+    },
+    {
+      "name": "viam-ml",
+      "source": "./plugins/viam-ml",
+      "description": "Data capture, training, and model deployment (TFLite, Triton, ONNX).",
+      "category": "robotics",
+      "tags": ["viam", "ml", "training", "inference"]
+    },
+    {
+      "name": "viam-cpp",
+      "source": "./plugins/viam-cpp",
+      "description": "C++ SDK: performance-critical driver modules.",
+      "category": "robotics",
+      "tags": ["viam", "cpp", "drivers"]
+    },
+    {
+      "name": "viam-typescript",
+      "source": "./plugins/viam-typescript",
+      "description": "TypeScript SDK: browser robot control, Viam Applications, HMIs.",
+      "category": "robotics",
+      "tags": ["viam", "typescript", "web"]
+    },
+    {
+      "name": "local-viam-server",
+      "source": "./plugins/local-viam-server",
+      "description": "Create a Viam cloud machine and run a local viam-server connected to it.",
+      "category": "robotics",
+      "tags": ["viam", "machine", "viam-server", "cli"]
+    },
+    {
+      "name": "viam-machine-config",
+      "source": "./plugins/viam-machine-config",
+      "description": "Push or replace a Viam machine's robot config via the Viam app API.",
+      "category": "robotics",
+      "tags": ["viam", "machine", "config", "fleet"]
+    }
+  ]
+}

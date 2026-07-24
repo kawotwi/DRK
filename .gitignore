@@ -216,3 +216,10 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Viam agent skills (added for Claude Code integration)
+viam-server.json
+*.viam-server.json
+
+# Contains a hardcoded API key; use robot.py + .env instead
+viam_sdk_snippet.py

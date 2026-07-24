@@ -1,0 +1,10 @@
+{
+  "name": "viam-go-motion-vision",
+  "version": "0.1.0",
+  "description": "Viam Go SDK: arm, camera, vision, motion planning, frame system, spatial math.",
+  "author": { "name": "Viam DevRel", "url": "https://github.com/viam-devrel" },
+  "homepage": "https://github.com/viam-devrel/agent-skills",
+  "repository": "https://github.com/viam-devrel/agent-skills",
+  "license": "Apache-2.0",
+  "keywords": ["viam", "go", "motion", "vision", "manipulation"]
+}

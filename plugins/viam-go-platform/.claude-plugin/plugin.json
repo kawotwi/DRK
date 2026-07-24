@@ -1,0 +1,10 @@
+{
+  "name": "viam-go-platform",
+  "version": "0.1.0",
+  "description": "Viam Go SDK: non-manipulation components (base, motor, board, sensors, etc.), services, and resource API.",
+  "author": { "name": "Viam DevRel", "url": "https://github.com/viam-devrel" },
+  "homepage": "https://github.com/viam-devrel/agent-skills",
+  "repository": "https://github.com/viam-devrel/agent-skills",
+  "license": "Apache-2.0",
+  "keywords": ["viam", "go", "components", "services", "resource-api"]
+}

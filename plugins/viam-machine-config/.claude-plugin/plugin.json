@@ -1,0 +1,10 @@
+{
+  "name": "viam-machine-config",
+  "version": "0.1.0",
+  "description": "Viam machine tooling: push or replace a machine's robot config (modules, components, services) via the Viam app API.",
+  "author": { "name": "Viam DevRel", "url": "https://github.com/viam-devrel" },
+  "homepage": "https://github.com/viam-devrel/agent-skills",
+  "repository": "https://github.com/viam-devrel/agent-skills",
+  "license": "Apache-2.0",
+  "keywords": ["viam", "machine", "config", "fleet"]
+}

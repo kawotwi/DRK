@@ -1,0 +1,10 @@
+{
+  "name": "viam-ml",
+  "version": "0.1.0",
+  "description": "Viam ML pipeline: data capture, datasets, training scripts (Keras, Ultralytics), model deployment (TFLite, Triton, ONNX).",
+  "author": { "name": "Viam DevRel", "url": "https://github.com/viam-devrel" },
+  "homepage": "https://github.com/viam-devrel/agent-skills",
+  "repository": "https://github.com/viam-devrel/agent-skills",
+  "license": "Apache-2.0",
+  "keywords": ["viam", "ml", "tflite", "training", "inference"]
+}

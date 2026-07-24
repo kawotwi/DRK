@@ -25,3 +25,24 @@ Replanned from right now. Two structural changes: the clock (3.5 hours left, so 
 **De-scope ladder from 1pm (invoke at gates, top-down):** drawer pull → drawer open-at-start → whole drawer epic (box becomes scenery; MVP1+2+4 is still a complete "cameraman + stagehand with a personality" story) → voice → typed → BC beat → verbal mention. Never cut: gestures, the 2:15 gate, rehearsal time.
 
 The single biggest 1pm risk is spending 90 minutes on the drawer while MVP2 is at 2-for-3. The gate order exists to prevent exactly that — a flawless sorter with a personality beats a drawer that opens once.
+
+## Claude Code skills
+
+This repo bundles [viam-devrel/agent-skills](https://github.com/viam-devrel/agent-skills) as a local Claude Code plugin marketplace (`.claude-plugin/`, `skills/`, `plugins/`). Most relevant to this project: `viam-python` (SDK/async patterns), `viam-ml` (YOLO training + deployment), `viam-modules-fleet` (CLI/fleet/robot config), `local-viam-server` and `viam-machine-config` (create/configure a machine via the app API). The Go, C++, and TypeScript skills are included too but off-stack for this build.
+
+Setup, from the repo root:
+
+```
+/plugin marketplace add .
+/plugin install viam-skills@viam-agent-skills
+```
+
+Or install only what's needed:
+
+```
+/plugin install viam-python@viam-agent-skills
+/plugin install viam-ml@viam-agent-skills
+/plugin install viam-modules-fleet@viam-agent-skills
+```
+
+Skills trigger automatically off file/context signals (e.g. touching code that imports the Viam Python SDK activates `viam-python`); invoke one manually with the `Skill` tool or by name.

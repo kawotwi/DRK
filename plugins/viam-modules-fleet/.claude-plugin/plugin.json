@@ -1,0 +1,10 @@
+{
+  "name": "viam-modules-fleet",
+  "version": "0.1.0",
+  "description": "Viam CLI, module lifecycle (generate, build, upload, reload), registry operations, fleet and robot configuration.",
+  "author": { "name": "Viam DevRel", "url": "https://github.com/viam-devrel" },
+  "homepage": "https://github.com/viam-devrel/agent-skills",
+  "repository": "https://github.com/viam-devrel/agent-skills",
+  "license": "Apache-2.0",
+  "keywords": ["viam", "cli", "modules", "fleet", "registry"]
+}
