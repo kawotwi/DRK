@@ -1,0 +1,10 @@
+{
+  "extraKnownMarketplaces": {
+    "viam-agent-skills": {
+      "source": {
+        "source": "github",
+        "repo": "kawotwi/DRK"
+      }
+    }
+  }
+}
