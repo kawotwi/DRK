@@ -39,7 +39,8 @@ async def main():
         print("  lift      - raise back to the pregrasp hover height")
         print("  return    - descend back down to the taught pose (origin), still holding the phone")
         print("  release   - open the gripper")
-        print("  full      - run pregrasp -> grasp -> lift -> return -> release in sequence")
+        print("  full      - run pregrasp -> grasp -> lift in sequence, then stop (holding, in shot position)")
+        print("             manually reposition for the shot, then run 'return' and 'release' separately")
         sys.exit(1)
     stage = sys.argv[1]
 
@@ -71,10 +72,10 @@ async def main():
         if stage in ("lift", "full"):
             await move_to(robot, motion, pregrasp_pose, "pregrasp (lift)")
 
-        if stage in ("return", "full"):
+        if stage == "return":
             await move_to(robot, motion, grasp_pose, "origin (return, still holding)")
 
-        if stage in ("release", "full"):
+        if stage == "release":
             await robot.call(lambda: gripper.open(), label="gripper.open")
             print("Gripper opened.")
 
