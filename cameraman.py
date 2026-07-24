@@ -22,6 +22,7 @@ tuning analysis.
 Run:  .venv/bin/python cameraman.py
 Stop: Ctrl-C (stops the arm on exit).
 """
+from __future__ import annotations  # allow `X | None` hints on Python 3.9
 
 import asyncio
 import csv
