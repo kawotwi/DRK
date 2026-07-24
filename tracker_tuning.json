@@ -15,13 +15,13 @@
   "lead_vel_min": 0.08,
   "tilt_enabled": true,
   "tilt_sign": -1.0,
-  "tilt_target_frac": 0.4,
-  "tilt_kp_deg": 4.0,
-  "tilt_max_step_deg": 2.0,
+  "tilt_target_frac": 0.5,
+  "tilt_kp_deg": 3.0,
+  "tilt_max_step_deg": 1.2,
   "tilt_slew_deg": 0.8,
   "tilt_deadband_enter": 0.1,
   "tilt_deadband_exit": 0.05,
-  "tilt_range_deg": 25.0,
+  "tilt_range_deg": 40.0,
   "min_height_frac": 0.3,
   "match_max_frac": 0.22,
   "size_ratio_max": 2.0,
@@ -29,5 +29,8 @@
   "acquire_frames": 2,
   "lost_frames": 12,
   "search_after_s": 4.0,
-  "search_step_deg": 0.5
+  "search_step_deg": 0.5,
+  "use_motion_service": false,
+  "j1_home": null,
+  "j5_home": null
 }
